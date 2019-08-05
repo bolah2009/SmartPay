@@ -45,7 +45,19 @@ Screenshot of stage 3
 
 For more details about stage one, see [PR #3](https://github.com/bolah2009/SmartPay/pull/3)
 
-- Stage 4 of 4 (Coming soon)
+- Stage 4 of 4 (Validate Payment Details)
+
+Validate Payment Details
+
+Screenshot of stage 4
+
+![Stage 4 of 4]()
+
+##### Validations:
+- one
+- two
+
+For more details about stage one, see [PR #2](https://github.com/bolah2009/SmartPay/pull/2)
 
 ---
 
