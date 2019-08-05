@@ -258,7 +258,19 @@
         return dateFormat.test(field.value);
       };
 
-      const detectCardType = first4Digits => {};
+      const detectCardType = first4Digits => {
+        const setCardType = (addCard, removeCard) => {
+          const creditCard = document.querySelector("div[data-credit-card]");
+          const cardTypeImg = document.querySelector("img[data-card-type]");
+          creditCard.classList.remove(removeCard);
+          creditCard.classList.add(addCard);
+          cardTypeImg.src = supportedCards[`${addCard.slice(3)}`];
+          return addCard;
+        };
+        first4Digits[0] === 4
+          ? setCardType("is-visa", "is-mastercard")
+          : setCardType("is-mastercard", "is-visa");
+      };
 
       const validateCardExpiryDate = () => {
         const target = document.querySelector(
@@ -279,12 +291,31 @@
         const isValid = RegExp("^[a-zA-Z]{3,}[ ][a-zA-Z]{3,}$").test(
           target.value
         );
+        console.log(target.value, isValid);
         flagIfInvalid(target, isValid);
-        //   console.log(target.value, isValid)
         return isValid;
       };
-
-      const validateCardNumber = () => {};
+      const validateWithLuhn = digits => {
+        if (digits.length !== 16) {
+          return false;
+        }
+        let bit = 1,
+          len = digits.length,
+          sum = 0;
+        const arr = [0, 2, 4, 6, 8, 1, 3, 5, 7, 9];
+        while (len) {
+          let val = digits[--len];
+          sum += (bit ^= 1) ? arr[val] : val;
+        }
+        return sum && sum % 10 === 0;
+      };
+      const validateCardNumber = () => {
+        const digits = appState.cardDigits.flat();
+        const isValid = validateWithLuhn(digits);
+        const target = document.querySelector("div[data-cc-digits]");
+        flagIfInvalid(target, isValid);
+        return isValid;
+      };
 
       const validatePayment = () => {
         validateCardNumber();
@@ -293,6 +324,54 @@
       };
 
       const acceptCardNumbers = (event, fieldIndex) => {};
+      const smartCursor = (event, fieldIndex, fields) => {
+        const { target } = event;
+        if (target.value.length >= target.size) {
+          if (fieldIndex + 1 >= fields.length) {
+            return;
+          }
+          fields[fieldIndex + 1].focus();
+        }
+      };
+
+      const smartInput = (event, fieldIndex) => {
+        if (fieldIndex > 3) {
+          return;
+        }
+        const charCode = event.charCode;
+        if (charCode < 48 || charCode > 57) {
+          event.preventDefault();
+          return;
+        }
+        const currentValue = String.fromCharCode(charCode);
+        if (event.target.value.length === 0) {
+          appState.cardDigits[fieldIndex] = [];
+        }
+        if (appState.cardDigits[fieldIndex]) {
+          appState.cardDigits[fieldIndex].push(Number(currentValue));
+        }
+        if (fieldIndex === 0) {
+          detectCardType(appState.cardDigits[0]);
+        }
+        const encodeText = "#".repeat(event.target.value.length + 1);
+        const encodeInput = () => {
+          event.target.value = encodeText;
+        };
+        window.setTimeout(encodeInput, 500);
+        console.log(appState.cardDigits);
+      };
+
+      const enableSmartTyping = () => {
+        const target = document.querySelectorAll("input");
+        target.forEach((field, index, fields) => {
+          field.addEventListener("keyup", event => {
+            smartCursor(event, index, fields);
+          });
+          field.addEventListener("keypress", event => {
+            smartInput(event, index);
+          });
+        });
+      };
 
       const uiCanInteract = () => {
         const firstCreditCardDigit = document.querySelector(
@@ -302,6 +381,7 @@
         const payButton = document.querySelector("[data-pay-btn]");
         payButton.addEventListener("click", validatePayment);
         billHype();
+        enableSmartTyping();
       };
 
       const displayCartTotal = ({ results }) => {
