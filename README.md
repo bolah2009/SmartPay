@@ -2,11 +2,9 @@
 
 ## ALC 4.0: Phase 1 Challenge - Mobile Web
 
-
 ### Description:
 
-> This challenge is aimed at having you roll up your sleeves and do some real coding practice based on what you’ve learnt from the contents available to you on the Pluralsight platform. The hands-on project will gauge your ability to apply the knowledge you’ve acquired and also challenge you in this learning journey. 
-
+> This challenge is aimed at having you roll up your sleeves and do some real coding practice based on what you’ve learnt from the contents available to you on the Pluralsight platform. The hands-on project will gauge your ability to apply the knowledge you’ve acquired and also challenge you in this learning journey.
 
 #### The objective is to build a SmartPay interface using HTML, CSS and Javascript (Strictly ES6).
 
@@ -20,9 +18,9 @@ Screenshot of stage 1
 
 For more details about stage one, see [PR #1](https://github.com/bolah2009/SmartPay/pull/1)
 
-- Stage 2 of 4 (Build & Style The UI)
+- Stage 2 of 4 (Get Total Bill )
 
-Get Total Bill using the fetch API to make HTTP request, buyer data is fetched from an API endpoint, summed up using 'reduce'  and formatted into buyer country currency using 'toLocaleString' and the formatted data is displayed appropriately using the 'querySelector'
+Get Total Bill using the fetch API to make HTTP request, buyer data is fetched from an API endpoint, summed up using 'reduce' and formatted into buyer country currency using 'toLocaleString' and the formatted data is displayed appropriately using the 'querySelector'
 
 Screenshot of stage 2
 
@@ -30,10 +28,26 @@ Screenshot of stage 2
 
 For more details about stage one, see [PR #2](https://github.com/bolah2009/SmartPay/pull/2)
 
+- Stage 3 of 4 (Handle simple validation)
 
-- Stage 3 of 4 (Coming soon)
+Handle simple validation using `.classList`, the card holder's name and expiry date are validated by adding or removing `invalid` CSS class to mark the field as invalid or not.
 
------ 
+Screenshot of stage 3
+
+|                                                           Valid                                                            |                                                           Invalid                                                            |
+| :------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
+| ![valid step 3 of 4](https://user-images.githubusercontent.com/36057474/62462798-325a8200-b780-11e9-9571-85aaea80a348.png) | ![invalid step 3 0f 4](https://user-images.githubusercontent.com/36057474/62462799-325a8200-b780-11e9-969e-1e00b189b0e3.png) |
+
+##### Validations:
+
+- The card's expiry date field should be in the _MM/YY_ format. with _YY_ a being future value (Value greater than the present year)
+- The card's holder name field should be 2 names separated by space. Each name should be at least 3 characters long.
+
+For more details about stage one, see [PR #3](https://github.com/bolah2009/SmartPay/pull/3)
+
+- Stage 4 of 4 (Coming soon)
+
+---
 
 #### Author
 

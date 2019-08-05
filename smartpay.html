@@ -249,10 +249,61 @@
         });
         return formattedMoney;
       };
+      const flagIfInvalid = (field, isValid) => {
+        field.classList.toggle("is-invalid", !isValid);
+      };
+
+      const expiryDateFormatIsValid = field => {
+        const dateFormat = RegExp("([1-9]|10|11|12)/[0-9]{2}$");
+        return dateFormat.test(field.value);
+      };
+
       const detectCardType = first4Digits => {};
-      const validateCardExpiryDate = () => {};
-      const validateCardHolderName = () => {};
-      const uiCanInteract = () => {};
+
+      const validateCardExpiryDate = () => {
+        const target = document.querySelector(
+          "[data-cc-info] input:last-of-type"
+        );
+        const isFuture =
+          `${new Date().getFullYear()}`.slice(-2) < target.value.slice(-2);
+        const isValid = expiryDateFormatIsValid(target) && isFuture;
+        flagIfInvalid(target, isValid);
+        console.log(target.value, isValid);
+        return isValid;
+      };
+
+      const validateCardHolderName = () => {
+        const target = document.querySelector(
+          "[data-cc-info] > input:first-of-type"
+        );
+        const isValid = RegExp("^[a-zA-Z]{3,}[ ][a-zA-Z]{3,}$").test(
+          target.value
+        );
+        flagIfInvalid(target, isValid);
+        //   console.log(target.value, isValid)
+        return isValid;
+      };
+
+      const validateCardNumber = () => {};
+
+      const validatePayment = () => {
+        validateCardNumber();
+        validateCardHolderName();
+        validateCardExpiryDate();
+      };
+
+      const acceptCardNumbers = (event, fieldIndex) => {};
+
+      const uiCanInteract = () => {
+        const firstCreditCardDigit = document.querySelector(
+          "[data-cc-digits] > input:first-of-type"
+        );
+        firstCreditCardDigit.focus();
+        const payButton = document.querySelector("[data-pay-btn]");
+        payButton.addEventListener("click", validatePayment);
+        billHype();
+      };
+
       const displayCartTotal = ({ results }) => {
         const [data] = results;
         const { itemsInCart, buyerCountry } = data;
