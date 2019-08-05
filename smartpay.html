@@ -237,18 +237,18 @@
       };
 
       const appState = {};
+
       const formatAsMoney = (amount, buyerCountry) => {
-        const { code = "US", currency = "USD" } = countries.find(
-          x => x.country === buyerCountry
-        );
-        const formattedMoney = amount.toLocaleString(`${"en-" + code}`, {
+        const currentCountry =
+          countries.find(
+            currentCountry => currentCountry.country === buyerCountry
+          ) || countries[0];
+        return amount.toLocaleString(`en-${currentCountry.code}`, {
           style: "currency",
-          currency: currency,
-          maximumFractionDigits: 2,
-          minimumFractionDigits: 2
+          currency: currentCountry.currency
         });
-        return formattedMoney;
       };
+
       const flagIfInvalid = (field, isValid) => {
         field.classList.toggle("is-invalid", !isValid);
       };
@@ -339,7 +339,7 @@
           return;
         }
         const charCode = event.charCode;
-        if (charCode < 48 || charCode > 57) {
+        if (charCode < 48 || charCode > 57 || event.target.value.length >= 4) {
           event.preventDefault();
           return;
         }
@@ -358,7 +358,7 @@
           event.target.value = encodeText;
         };
         window.setTimeout(encodeInput, 500);
-        console.log(appState.cardDigits);
+        console.log(appState.cardDigits[fieldIndex]);
       };
 
       const enableSmartTyping = () => {
