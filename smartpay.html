@@ -236,13 +236,51 @@
         });
       };
 
+      const appState = {};
+      const formatAsMoney = (amount, buyerCountry) => {
+        const { code = "US", currency = "USD" } = countries.find(
+          x => x.country === buyerCountry
+        );
+        const formattedMoney = amount.toLocaleString(`${"en-" + code}`, {
+          style: "currency",
+          currency: currency,
+          maximumFractionDigits: 2,
+          minimumFractionDigits: 2
+        });
+        return formattedMoney;
+      };
+      const detectCardType = first4Digits => {};
+      const validateCardExpiryDate = () => {};
+      const validateCardHolderName = () => {};
+      const uiCanInteract = () => {};
+      const displayCartTotal = ({ results }) => {
+        const [data] = results;
+        const { itemsInCart, buyerCountry } = data;
+        appState.items = itemsInCart;
+        appState.country = buyerCountry;
+        appState.bill = itemsInCart.reduce(
+          (accumulator, { qty, price }) => accumulator + qty * price,
+          0
+        );
+        appState.billFormatted = formatAsMoney(appState.bill, appState.country);
+        const dataBill = document.querySelector("SPAN[data-bill]");
+        dataBill.textContent = appState.billFormatted;
+        appState.cardDigits = [];
+        uiCanInteract();
+      };
       const fetchBill = () => {
         const apiHost = "https://randomapi.com/api";
         const apiKey = "006b08a801d82d0c9824dcfdfdfa3b3c";
         const apiEndpoint = `${apiHost}/${apiKey}`;
+        fetch(apiEndpoint)
+          .then(response => response.json())
+          .then(data => displayCartTotal(data))
+          .catch(error => console.error(error));
       };
 
-      const startApp = () => {};
+      const startApp = () => {
+        fetchBill();
+      };
 
       startApp();
     </script>
