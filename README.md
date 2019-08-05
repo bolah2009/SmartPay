@@ -26,7 +26,7 @@ Screenshot of stage 2
 
 ![Stage 2 of 4](https://user-images.githubusercontent.com/36057474/62460218-4ea6f080-b779-11e9-9c5b-0122d983f5e8.png)
 
-For more details about stage one, see [PR #2](https://github.com/bolah2009/SmartPay/pull/2)
+For more details about stage two, see [PR #2](https://github.com/bolah2009/SmartPay/pull/2)
 
 - Stage 3 of 4 (Handle simple validation)
 
@@ -43,21 +43,25 @@ Screenshot of stage 3
 - The card's expiry date field should be in the _MM/YY_ format. with _YY_ a being future value (Value greater than the present year)
 - The card's holder name field should be 2 names separated by space. Each name should be at least 3 characters long.
 
-For more details about stage one, see [PR #3](https://github.com/bolah2009/SmartPay/pull/3)
+For more details about stage three, see [PR #3](https://github.com/bolah2009/SmartPay/pull/3)
 
 - Stage 4 of 4 (Validate Payment Details)
 
-Validate Payment Details
+Implement smart typing by displaying temporarily for half a second as the user types and disallow invalid entries (non-integers) in the four-card number fields. Displays a Visa or MasterCard logo depending on the card number entered and Implement the The Luhn Algorithm to validate 16-digit credit card numbers
 
 Screenshot of stage 4
 
-![Stage 4 of 4]()
+|                                                         Valid Card Number                                                         |                                                     Invalid Card Number                                                      |
+| :-------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
+|  ![valid visa step 4 of 4](https://user-images.githubusercontent.com/36057474/62469746-d51afc80-b790-11e9-9b70-ca22f823ac77.gif)  |    ![invalid visa](https://user-images.githubusercontent.com/36057474/62469741-d4826600-b790-11e9-9e86-f173b74227c5.png)     |
+| ![valid master step 4 of 4](https://user-images.githubusercontent.com/36057474/62469745-d51afc80-b790-11e9-9466-13c403c846fa.gif) | ![invalid master card](https://user-images.githubusercontent.com/36057474/62469744-d4826600-b790-11e9-99de-d2b1a5fcbe30.png) |
 
 ##### Validations:
-- one
-- two
 
-For more details about stage one, see [PR #2](https://github.com/bolah2009/SmartPay/pull/2)
+- Disallow non-integers
+- Uses Luhn Algorithm to validate 16-digit credit card numbers
+
+For more details about stage four, see [PR #4](https://github.com/bolah2009/SmartPay/pull/4)
 
 ---
 
