@@ -14,15 +14,24 @@
 
 Build the HTML structure of the credit card component and a button that allows a user to make payment and style the app to improve the look and feel using CSS.
 
-Screenshot os stage 1
+Screenshot of stage 1
 
 ![Stage 1 of 4](https://user-images.githubusercontent.com/36057474/62360214-384a2c00-b510-11e9-830f-ecf148e0f8d7.png)
 
-For more details about stage one, see PR #1
+For more details about stage one, see [PR #1](https://github.com/bolah2009/SmartPay/pull/1)
 
-- Stage 2 of 4 (Coming soon)
+- Stage 2 of 4 (Build & Style The UI)
+
+Get Total Bill using the fetch API to make HTTP request, buyer data is fetched from an API endpoint, summed up using 'reduce'  and formatted into buyer country currency using 'toLocaleString' and the formatted data is displayed appropriately using the 'querySelector'
+
+Screenshot of stage 2
+
+![Stage 2 of 4](https://user-images.githubusercontent.com/36057474/62460218-4ea6f080-b779-11e9-9c5b-0122d983f5e8.png)
+
+For more details about stage one, see [PR #2](https://github.com/bolah2009/SmartPay/pull/2)
 
 
+- Stage 3 of 4 (Coming soon)
 
 ----- 
 
